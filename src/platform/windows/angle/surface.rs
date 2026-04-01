@@ -599,6 +599,15 @@ impl Surface {
             _ => false,
         }
     }
+
+    /// Access the DXGI share handle if this surface is backed by a D3D11 texture.
+    #[inline]
+    pub fn d3d11_share_handle(&self) -> Option<winapi::um::winnt::HANDLE> {
+        match self.win32_objects {
+            Win32Objects::Pbuffer { share_handle, .. } => Some(share_handle),
+            _ => None,
+        }
+    }
 }
 
 /// Represents the CPU view of the pixel data of this surface.
