@@ -600,9 +600,9 @@ impl Surface {
         }
     }
 
-    /// Access the DXGI share handle if this surface is backed by a D3D11 texture.
+    /// Returns the DXGI share handle if it has one.
     #[inline]
-    pub fn d3d11_share_handle(&self) -> Option<winapi::um::winnt::HANDLE> {
+    pub fn share_handle(&self) -> Option<HANDLE> {
         match self.win32_objects {
             Win32Objects::Pbuffer { share_handle, .. } => Some(share_handle),
             _ => None,
